@@ -58,6 +58,7 @@ namespace MNH_Ecommerce.Web
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
+                //agsfdgfds
 
                 spa.Options.SourcePath = "ClientApp";
 
