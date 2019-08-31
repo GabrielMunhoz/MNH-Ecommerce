@@ -1,10 +1,11 @@
 ﻿using MNH_Ecommerce.Domain.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MNH_Ecommerce.Domain.Entity
 {
-    public class Demand
+    public class Demand : AbstractEntity
     {
         public int Id { get; set; }
         public DateTime DemandDate{ get; set; }
@@ -23,5 +24,23 @@ namespace MNH_Ecommerce.Domain.Entity
         /// ou muitos itens de pedidos
         /// </summary>
         public ICollection<ItemDemand> ItemDemands { get; set; }
+
+        /// <summary>
+        /// Tratamento de regras de negocio
+        /// </summary>
+        protected override void Validate()
+        {
+            CleanMessagesValidator();
+
+            if (ItemDemands.Any())
+            {
+                AddMenssageValidator("Pedido não Pode ficar sem item de pedido vazio!");
+            }
+
+            if (string.IsNullOrEmpty(CEP))
+            {
+                AddMenssageValidator("CEP não pode ser vazio!");
+            }
+        }
     }
 }

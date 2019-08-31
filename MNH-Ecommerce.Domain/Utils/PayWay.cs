@@ -24,5 +24,6 @@ namespace MNH_Ecommerce.Domain.Utils
             get { return Id == (int)TypePayWay.PaymentUdefined; }
                 
         }
+
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MNH_Ecommerce.Domain.Entity
 {
-    public class User
+    public class User : AbstractEntity
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -13,5 +13,17 @@ namespace MNH_Ecommerce.Domain.Entity
         /// Nenhum ou muitos pedidos
         /// </summary>
         public ICollection<Demand> Demands { get; set; }
+
+        protected override void Validate()
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                AddMenssageValidator("Email - não pode ser vazio!");
+            }
+            if (string.IsNullOrEmpty(Name))
+            {
+                AddMenssageValidator("Nome - não pode ser vazio!");
+            }
+        }
     }
 }
