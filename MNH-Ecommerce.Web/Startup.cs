@@ -5,22 +5,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MNH_Ecommerce.Repository.Context;
 
 namespace MNH_Ecommerce.Web
 { 
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            //Configuração do entity
+            var builder = new ConfigurationBuilder();
+
+            builder.AddJsonFile("Config.json",optional:false, reloadOnChange:true);
+
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var connectionString = Configuration.GetConnectionString("MyStringConnection");
+
+            //services.AddDbContext<MNH_EcommerceContext>(option => option.UseAzure(connectionString, m => m.MigrationsAssembly("MNH-Ecommerce.Repository"));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

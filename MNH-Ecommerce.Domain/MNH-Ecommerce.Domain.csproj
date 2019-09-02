@@ -5,8 +5,4 @@
     <RootNamespace>MNH_Ecommerce.Domain</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Contratos\" />
-  </ItemGroup>
-
 </Project>
