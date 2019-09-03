@@ -1,7 +1,7 @@
-﻿using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MNH_Ecommerce.Domain.Entity;
 using MNH_Ecommerce.Domain.Utils;
+using MNH_Ecommerce.Repository.Config;
 
 namespace MNH_Ecommerce.Repository.Context
 {
@@ -16,6 +16,17 @@ namespace MNH_Ecommerce.Repository.Context
 
         public MNH_EcommerceContext(DbContextOptions options) : base(options)
         { 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //classes de mapeamento db
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemDemandConfiguration());
+            modelBuilder.ApplyConfiguration(new DemandConfiguration());
+            modelBuilder.ApplyConfiguration(new PayWayConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

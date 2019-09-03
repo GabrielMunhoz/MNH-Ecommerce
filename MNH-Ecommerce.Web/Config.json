@@ -1,6 +1,5 @@
 {
-  "": "",
   "ConnectionStrings": {
-    "MNH-EcommerceDB": ""
+    "MNH-EcommerceDB": "Server=tcp:mnhserver.database.windows.net,1433;Initial Catalog=mnhecommerceDB;Persist Security Info=False;User ID={admindb};Password={S3nhaAdmin};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
 }

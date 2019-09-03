@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MNH_Ecommerce.Repository.Context;
@@ -29,9 +30,12 @@ namespace MNH_Ecommerce.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var connectionString = Configuration.GetConnectionString("MyStringConnection");
+            var connectionString = Configuration.GetConnectionString("MNH-EcommerceDB");
 
-            //services.AddDbContext<MNH_EcommerceContext>(option => option.UseAzure(connectionString, m => m.MigrationsAssembly("MNH-Ecommerce.Repository"));
+            services.AddDbContext<MNH_EcommerceContext>(option => option.UseSqlServer(connectionString, m => m.MigrationsAssembly("MNH-Ecommerce.Repository")));
+
+            //services.AddDbContext<MNH_EcommerceContext> (options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings")));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
