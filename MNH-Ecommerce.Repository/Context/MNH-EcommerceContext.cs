@@ -26,6 +26,13 @@ namespace MNH_Ecommerce.Repository.Context
             modelBuilder.ApplyConfiguration(new ItemDemandConfiguration());
             modelBuilder.ApplyConfiguration(new DemandConfiguration());
             modelBuilder.ApplyConfiguration(new PayWayConfiguration());
+
+            //modelBuilder.Entity<PayWay>().HasData(
+            //    new PayWay() { Id = 1, Name = "Boleto", Description = "Forma de pagamento Boleto" },
+            //    new PayWay() { Id = 2, Name = "Cartão de Crédito", Description = "Forma de pagamento Cartão de crédito" },
+            //    new PayWay() { Id = 3, Name = "Depósito Bancário", Description = "Forma de pagamento Depósito Bancário" },
+            //    new PayWay() { Id = 4, Name = "Indefinido", Description = "Forma de pagamento Indefinido" }
+            //    );
             base.OnModelCreating(modelBuilder);
         }
     }

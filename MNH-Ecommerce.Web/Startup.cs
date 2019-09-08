@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MNH_Ecommerce.Domain.Contrats;
 using MNH_Ecommerce.Repository.Context;
+using MNH_Ecommerce.Repository.Repositories;
 
 namespace MNH_Ecommerce.Web
 { 
@@ -32,7 +34,12 @@ namespace MNH_Ecommerce.Web
 
             var connectionString = Configuration.GetConnectionString("MNH-EcommerceDB");
 
-            services.AddDbContext<MNH_EcommerceContext>(option => option.UseSqlServer(connectionString, m => m.MigrationsAssembly("MNH-Ecommerce.Repository")));
+            services.AddDbContext<MNH_EcommerceContext>(option =>
+                                                            option.UseLazyLoadingProxies()
+                                                            .UseSqlServer(connectionString, m => m.MigrationsAssembly("MNH-Ecommerce.Repository")));
+
+            //Passando o contrato
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             //services.AddDbContext<MNH_EcommerceContext> (options =>
             //options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings")));
@@ -73,14 +80,13 @@ namespace MNH_Ecommerce.Web
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
-                //agsfdgfds
 
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
         }

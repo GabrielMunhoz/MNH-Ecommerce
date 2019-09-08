@@ -18,6 +18,9 @@ namespace MNH_Ecommerce.Repository.Config
             builder.Property(u => u.lastName).IsRequired();
             builder.Property(u => u.lastName).IsRequired();
 
+            builder.HasMany(u => u.Demands).WithOne(p => p.User);
+
+            
         }
     }
 }

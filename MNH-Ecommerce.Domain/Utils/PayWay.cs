@@ -21,7 +21,7 @@ namespace MNH_Ecommerce.Domain.Utils
                 
         }
         public bool PaymentUdefined {
-            get { return Id == (int)TypePayWay.PaymentUdefined; }
+            get { return Id == (int)TypePayWay.PaymentUndefined; }
                 
         }
 

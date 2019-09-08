@@ -12,7 +12,7 @@ namespace MNH_Ecommerce.Domain.Entity
         /// <summary>
         /// Nenhum ou muitos pedidos
         /// </summary>
-        public ICollection<Demand> Demands { get; set; }
+        public virtual ICollection<Demand> Demands { get; set; }
 
         protected override void Validate()
         {

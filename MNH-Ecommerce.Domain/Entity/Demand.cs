@@ -10,6 +10,7 @@ namespace MNH_Ecommerce.Domain.Entity
         public int Id { get; set; }
         public DateTime DemandDate{ get; set; }
         public int UserId { get; set; }
+        public virtual User User { get; set; }
         public DateTime DeliveryDate { get; set; }
         public string CEP { get; set; }
         public string State { get; set; }
@@ -17,13 +18,13 @@ namespace MNH_Ecommerce.Domain.Entity
         public string CompleteAddress { get; set; }
         public string AddressNumber { get; set; }
         public int PayWayId { get; set; }
-        public PayWay PayWay { get; set; }
+        public virtual PayWay PayWay { get; set; }
 
         /// <summary>
         /// Pedido deve ter pelo menos um item de pedido
         /// ou muitos itens de pedidos
         /// </summary>
-        public ICollection<ItemDemand> ItemDemands { get; set; }
+        public virtual ICollection<ItemDemand> ItemDemands { get; set; }
 
         /// <summary>
         /// Tratamento de regras de negocio
