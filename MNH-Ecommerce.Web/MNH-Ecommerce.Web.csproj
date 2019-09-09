@@ -27,7 +27,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\autorization\guard.routes.ts" />
+    <None Remove="ClientApp\src\app\model\User.ts" />
+    <None Remove="ClientApp\src\app\products\product.component.ts" />
+    <None Remove="ClientApp\src\app\user\login\login.component.ts" />
+    <None Remove="ClientApp\src\app\user\register\register.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MNH-Ecommerce.Repository\MNH-Ecommerce.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\autorization\guard.routes.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\model\User.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\products\product.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\user\login\login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\user\register\register.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <ItemGroup>

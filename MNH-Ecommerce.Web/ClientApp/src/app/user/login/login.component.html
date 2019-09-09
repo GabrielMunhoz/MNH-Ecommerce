@@ -1,0 +1,51 @@
+<div class="text-center">
+  <form class="form-sigin">
+    <h1 class="h4 mb-3 login">Entrar</h1>
+
+    <label for=" inputEmail" class="sr-only">Email</label>
+    <input type="email" id="inputEmail"
+           name="email" placeholder="Insira o Email"
+           class="form-control mb-2"
+           [ngClass] ="{
+           'is-invalid': email.invalid && (email.dirty || email.touched),
+           'is-valid': email.valid && (email.dirty || email.touched)
+           }"
+           [(ngModel)]="user.email"
+           #email="ngModel"
+           email
+           required
+           />
+
+    <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors.required">
+        Email deve ser preenchido
+      </div>
+      <div *ngIf="email.errors.email">
+        Email não esta no formato correto
+      </div>
+    </div>
+
+    <label for="inputsenha" class="sr-only">Senha</label>
+
+    <input type="password" id="inputSenha"
+           name="senha" placeholder="Senha"
+           class="form-control mb-2"
+           [ngClass] ="{
+           'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+           'is-valid': senha.valid && (senha.dirty || senha.touched)
+           }"
+           [(ngModel)]="user.senha"
+           #senha="ngModel"
+           required />
+
+    <div class="invalid-feedback" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
+      <div *ngIf="senha.errors.required">
+        Senha deve ser informada
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block mb-2" type="submit" (click)="entrar()">Entrar</button>
+    <img src="../../../assets/Img/ImagemTeste.jpg" />
+
+  </form>
+</div>
