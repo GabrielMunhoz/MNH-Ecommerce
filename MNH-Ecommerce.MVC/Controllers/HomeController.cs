@@ -21,8 +21,9 @@ namespace MNH_Ecommerce.MVC.Controllers
 
         public IActionResult Index()
         {
+            var t = _productRepository.GetAll();
 
-            return View(_productRepository.GetAll());
+            return View(t);
         }
 
         public IActionResult Privacy()

@@ -18,18 +18,34 @@ namespace MNH_Ecommerce.MVC.Controllers
     {
         private readonly IProductRepository _productRepository;
 
+        
+
         private IHttpContextAccessor _httpContextAccessor;
 
         private IHostingEnvironment _hostingEnvironment;
 
-        public ProductController(IProductRepository context)
+        public ProductController(IProductRepository context
+            , IHttpContextAccessor httpContextAccessor
+            , IHostingEnvironment hostingEnvironment)
         {
             _productRepository = context;
+            _httpContextAccessor = httpContextAccessor;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
         {
+            if (!userLogado())
+            {
+                return RedirectToAction("Entrar", "User", new { area = "" });
+            }
             return View(_productRepository.GetAll());
+
+        }
+
+        private bool userLogado()
+        {
+            return UserController.usuarioLogado;
         }
 
         public IActionResult Details(int? id)
@@ -59,6 +75,11 @@ namespace MNH_Ecommerce.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,Name,Description,Price,FileName")] Product product)
         {
+            var file = Request.Form.Files[0];
+
+             var str = SendFile(file);
+
+            product.FileName = str;
             if (ModelState.IsValid)
             {
                 _productRepository.Add(product);
@@ -86,6 +107,10 @@ namespace MNH_Ecommerce.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Name,Description,Price,FileName")] Product product)
         {
+            var file = Request.Form.Files[0];
+
+            SendFile(file);
+
             if (id != product.Id)
             {
                 return NotFound();
@@ -139,39 +164,39 @@ namespace MNH_Ecommerce.MVC.Controllers
         {
             return _productRepository.GetAll().Any(e => e.Id == id);
         }
-        //[HttpPost, ActionName("SendFile")]
-        //public IActionResult SendFile()
-        //{
-        //    try
-        //    {
-        //        var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["selectedFile"];
-        //        var nameFile = formFile.FileName;
-        //        var extension = Path.GetExtension(nameFile);
+        [HttpPost, ActionName("SendFile")]
+        public string SendFile(IFormFile formFile)
+        {
+            try
+            {
+                //var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["selectedFile"];
+                var nameFile = formFile.FileName;
+                var extension = Path.GetExtension(nameFile);
 
-        //        var arrayNameCompact = Path.GetFileNameWithoutExtension(nameFile).Take(10).ToArray();
-        //        string newNameFile = NomeArquivo(extension, arrayNameCompact);
-        //        var folderFiles = _hostingEnvironment.WebRootPath + "\\Files\\";
-        //        var fullName = folderFiles + newNameFile;
+                var arrayNameCompact = Path.GetFileNameWithoutExtension(nameFile).Take(10).ToArray();
+                string newNameFile = NomeArquivo(extension, arrayNameCompact);
+                var folderFiles = _hostingEnvironment.WebRootPath + "\\Files\\";
+                var fullName = folderFiles + newNameFile;
 
-        //        using (var streamFile = new FileStream(fullName, FileMode.Create))
-        //        {
-        //            formFile.CopyTo(streamFile);
-        //        }
+                using (var streamFile = new FileStream(fullName, FileMode.Create))
+                {
+                    formFile.CopyTo(streamFile);
+                }
 
-        //        return Json(newNameFile);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.ToString());
-        //    }
+                return newNameFile;
+            }
+            catch (Exception ex)
+            {
+                return "Algo deu errado ao salvar a imagem";
+            }
 
-        //}
+        }
 
-        //private static string NomeArquivo(string extension, char[] arrayNameCompact)
-        //{
-        //    var newNameFile = new string(arrayNameCompact).Replace(" ", "-");
-        //    newNameFile += DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + extension;
-        //    return newNameFile;
-        //}
+        private static string NomeArquivo(string extension, char[] arrayNameCompact)
+        {
+            var newNameFile = new string(arrayNameCompact).Replace(" ", "-");
+            newNameFile += DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + extension;
+            return newNameFile;
+        }
     }
 }

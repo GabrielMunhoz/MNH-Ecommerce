@@ -5,36 +5,67 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MNH_Ecommerce.Domain.Contrats;
 using MNH_Ecommerce.Domain.Entity;
 using MNH_Ecommerce.Repository.Context;
+using MNH_Ecommerce.Repository.Repositories;
 
 namespace MNH_Ecommerce.MVC.Controllers
 {
     public class UserController : Controller
     {
-        private readonly MNH_EcommerceContext _context;
+        private readonly IUserRepository _context;
+        public static bool usuarioLogado = false;
 
-        public UserController(MNH_EcommerceContext context)
+        public UserController(IUserRepository context)
         {
             _context = context;
         }
 
         // GET: User
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(_context.GetAll());
         }
 
+        public IActionResult Entrar()
+        {
+            if (usuarioLogado)
+            {
+                return RedirectToAction("Index", "User", new { area = "" });
+            }
+            return View();
+
+        }
+
+        public IActionResult Logar([Bind("Email,Password")] User user)
+        {
+            try
+            {
+                var returnedUser = _context.Login(user.Email, user.Password);
+
+                if (returnedUser != null)
+                {
+                    usuarioLogado = true;
+
+                    return RedirectToAction("Index", "User", new { area = "" });
+                }
+                return RedirectToAction("Create", "User", new { area = "" });
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Create", "User", new { area = "" });
+            }
+        }
         // GET: User/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = _context.GetAll().FirstOrDefault(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -54,26 +85,25 @@ namespace MNH_Ecommerce.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,Password,Name,LastName")] User user)
+        public IActionResult Create([Bind("Id,Email,Password,Name,LastName")] User user)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(user);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
 
         // GET: User/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            var user = _context.GetById(id);
             if (user == null)
             {
                 return NotFound();
@@ -86,7 +116,7 @@ namespace MNH_Ecommerce.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,Name,LastName")] User user)
+        public IActionResult Edit(int id, [Bind("Id,Email,Password,Name,LastName")] User user)
         {
             if (id != user.Id)
             {
@@ -98,7 +128,6 @@ namespace MNH_Ecommerce.MVC.Controllers
                 try
                 {
                     _context.Update(user);
-                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,15 +146,14 @@ namespace MNH_Ecommerce.MVC.Controllers
         }
 
         // GET: User/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = _context.GetAll().FirstOrDefault(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -137,17 +165,16 @@ namespace MNH_Ecommerce.MVC.Controllers
         // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            var user = _context.GetById(id);
+            _context.Delete(user);
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.GetAll().Any(e => e.Id == id);
         }
     }
 }

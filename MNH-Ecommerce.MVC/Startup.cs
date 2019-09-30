@@ -49,7 +49,9 @@ namespace MNH_Ecommerce.MVC
 
             //Passando o contrato
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
