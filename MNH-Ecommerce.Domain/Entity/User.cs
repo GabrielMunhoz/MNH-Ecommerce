@@ -8,13 +8,13 @@ namespace MNH_Ecommerce.Domain.Entity
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-        public string lastName { get; set; }
+        public string LastName { get; set; }
         /// <summary>
         /// Nenhum ou muitos pedidos
         /// </summary>
         public virtual ICollection<Demand> Demands { get; set; }
 
-        protected override void Validate()
+        public override void Validate()
         {
             if (string.IsNullOrEmpty(Email))
             {

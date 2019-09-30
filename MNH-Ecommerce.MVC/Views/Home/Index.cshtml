@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MNH_Ecommerce.Domain.Entity.Product>
+
+
+@{
+    ViewData["Title"] = "Home";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-2">
+
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <img class="card-top" src="../../../../../Files/@Html.DisplayFor(modelItem => item.FileName)" style="width:200px; height:200px;" />
+                    <div class="card-body">
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                        <div class="card-text"> @Html.DisplayFor(modelItem => item.Description)</div>
+                        <h5 class="h5">R$@Html.DisplayFor(modelItem => item.Price)</h5>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

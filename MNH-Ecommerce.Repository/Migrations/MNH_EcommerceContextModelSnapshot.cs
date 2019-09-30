@@ -80,6 +80,8 @@ namespace MNH_Ecommerce.Repository.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("FileName");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -100,13 +102,13 @@ namespace MNH_Ecommerce.Repository.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<string>("Password")
-                        .IsRequired();
-
-                    b.Property<string>("lastName")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -129,32 +131,6 @@ namespace MNH_Ecommerce.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PayWays");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Forma de pagamento Boleto",
-                            Name = "Boleto"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Forma de pagamento Cartão de crédito",
-                            Name = "Cartão de Crédito"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Forma de pagamento Depósito Bancário",
-                            Name = "Depósito Bancário"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Forma de pagamento Indefinido",
-                            Name = "Indefinido"
-                        });
                 });
 
             modelBuilder.Entity("MNH_Ecommerce.Domain.Entity.Demand", b =>

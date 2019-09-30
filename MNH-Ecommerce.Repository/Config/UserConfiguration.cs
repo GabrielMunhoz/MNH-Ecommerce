@@ -15,9 +15,7 @@ namespace MNH_Ecommerce.Repository.Config
                  .HasMaxLength(50);
             builder.Property(u => u.Name).IsRequired();
             builder.Property(u => u.Password).IsRequired();
-            builder.Property(u => u.lastName).IsRequired();
-            builder.Property(u => u.lastName).IsRequired();
-
+            builder.Property(u => u.LastName).IsRequired();
             builder.HasMany(u => u.Demands).WithOne(p => p.User);
 
             

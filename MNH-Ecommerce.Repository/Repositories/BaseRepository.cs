@@ -2,6 +2,7 @@
 using MNH_Ecommerce.Repository.Context;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MNH_Ecommerce.Repository.Repositories
@@ -15,10 +16,17 @@ namespace MNH_Ecommerce.Repository.Repositories
             MnhEcommerceContext = mnh_EcommerceContext;
         }
 
-        public void Adicionar(TEntity entity)
+        public void Add(TEntity entity)
         {
-            MnhEcommerceContext.Set<TEntity>().Add(entity);
-            MnhEcommerceContext.SaveChanges();
+            try
+            {
+                MnhEcommerceContext.Set<TEntity>().Add(entity);
+                MnhEcommerceContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
         public void Delete(TEntity entity)

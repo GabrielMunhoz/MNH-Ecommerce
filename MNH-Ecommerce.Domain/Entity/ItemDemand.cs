@@ -6,7 +6,7 @@
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 
-        protected override void Validate()
+        public override void Validate()
         {
             if (Quantity == 0)
             {

@@ -6,8 +6,9 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public string FileName { get; set; }
 
-        protected override void Validate()
+        public override void Validate()
         {
             if (string.IsNullOrEmpty(Name))
             {

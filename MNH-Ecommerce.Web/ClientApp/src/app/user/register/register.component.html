@@ -1,10 +1,98 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+<div class="text-center">
+  <form class="form-sigin">
+    <h1 class="h4 mb-3 login">Registrar</h1>
 
-</body>
-</html>
+    <label for=" inputEmail" class="sr-only">Email</label>
+    <input type="email" id="inputEmail"
+           name="email" placeholder="Insira o Email"
+           class="form-control mb-2"
+           [ngClass]="{
+           'is-invalid': email.invalid && (email.dirty || email.touched),
+           'is-valid': email.valid && (email.dirty || email.touched)
+           }"
+           [(ngModel)]="user.email"
+           #email="ngModel"
+           email
+           required />
+
+    <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors.required">
+        Email deve ser preenchido
+      </div>
+      <div *ngIf="email.errors.email">
+        Email não esta no formato correto
+      </div>
+    </div>
+
+    <label for="inputsenha" class="sr-only">Senha</label>
+
+    <input type="password" id="inputSenha"
+           name="senha" placeholder="Senha"
+           class="form-control mb-2"
+           [ngClass]="{
+           'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+           'is-valid': senha.valid && (senha.dirty || senha.touched)
+           }"
+           [(ngModel)]="user.password"
+           #senha="ngModel"
+           required />
+
+    <div class="invalid-feedback" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
+      <div *ngIf="senha.errors.required">
+        Senha deve ser informada
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="message">
+      {{message}}
+    </div>
+
+    <div class="alert alert-success" *ngIf="registredUser">
+      Usuario Cadastrado com sucesso! <a class="alert-link" [routerLink]='["/enter"]' >Clique aqui</a>
+      para logar no sistema.
+    </div>
+
+    <label for=" inputName" class="sr-only">Nome</label>
+    <input type="text" id="inputname"
+           name="name" placeholder="Insira o Nome"
+           class="form-control mb-2"
+           [ngClass]="{
+           'is-invalid': name.invalid && (name.dirty || name.touched),
+           'is-valid': name.valid && (name.dirty || name.touched)
+           }"
+           [(ngModel)]="user.name"
+           #name="ngModel"
+           required />
+
+    <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+      <div *ngIf="name.errors.required">
+        Nome deve ser preenchido
+      </div>
+    </div>
+
+    <label for=" inputLastName" class="sr-only">Sobrenome</label>
+    <input type="text" id="inputLastName"
+           name="lastName" placeholder="Insira o Sobrenome"
+           class="form-control mb-2"
+           [ngClass]="{
+           'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
+           'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
+           }"
+           [(ngModel)]="user.lastName"
+           #lastName="ngModel"
+           required />
+    <div class="invalid-feedback" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+      <div *ngIf="lastName.errors.required">
+        Nome deve ser preenchido
+      </div>
+    </div>
+    <button class="btn btn-primary btn-block mb-2" type="submit" (click)="registerUser()" [disabled]="playSpinner">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="playSpinner"></span>
+      Registrar
+    </button>
+    <div><a [routerLink]='["/enter"]'>Voltar</a></div>
+
+    <img src="../../../assets/Img/ImagemTeste.jpg" />
+
+  </form>
+</div>

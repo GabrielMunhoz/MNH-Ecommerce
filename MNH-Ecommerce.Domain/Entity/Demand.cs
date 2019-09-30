@@ -29,7 +29,7 @@ namespace MNH_Ecommerce.Domain.Entity
         /// <summary>
         /// Tratamento de regras de negocio
         /// </summary>
-        protected override void Validate()
+        public override void Validate()
         {
             CleanMessagesValidator();
 

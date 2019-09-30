@@ -5,23 +5,28 @@ namespace MNH_Ecommerce.Domain.Entity
 {
     public abstract class AbstractEntity
     {
-        protected List<string> _MenssagesValidator { get; set; }
-        private List<string> MenssagesValidator
+        protected List<string> _MessagesValidator { get; set; }
+        private List<string> MessagesValidator
         {
-            get { return _MenssagesValidator ?? (_MenssagesValidator = new List<string>()); }
+            get { return _MessagesValidator ?? (_MessagesValidator = new List<string>()); }
         }
-        protected bool IsValid {
-            get { return !MenssagesValidator.Any(); }
+        public bool IsValid {
+            get { return !MessagesValidator.Any(); }
         }
-        protected abstract void Validate();
+        public abstract void Validate();
 
         protected void CleanMessagesValidator()
         {
-            MenssagesValidator.Clear();
+            MessagesValidator.Clear();
         }
         protected void AddMenssageValidator(string menssage)
         {
-            MenssagesValidator.Add(menssage);
+            MessagesValidator.Add(menssage);
+        }
+
+        public string GetMessageValidate()
+        {
+            return string.Join(" . ", MessagesValidator);
         }
 
     }

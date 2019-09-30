@@ -28,10 +28,17 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\autorization\guard.routes.ts" />
+    <None Remove="ClientApp\src\app\model\Product.ts" />
     <None Remove="ClientApp\src\app\model\User.ts" />
+    <None Remove="ClientApp\src\app\products\search\search.product.component.ts" />
     <None Remove="ClientApp\src\app\products\product.component.ts" />
+    <None Remove="ClientApp\src\app\Store\search\Store.Search.Component.css" />
+    <None Remove="ClientApp\src\app\Store\search\Store.Search.Component.html" />
+    <None Remove="ClientApp\src\app\Store\search\Store.Search.Component.ts" />
     <None Remove="ClientApp\src\app\user\login\login.component.ts" />
     <None Remove="ClientApp\src\app\user\register\register.component.ts" />
+    <None Remove="ClientApp\src\services\product\product.service.ts" />
+    <None Remove="ClientApp\src\services\user\user.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,18 +47,33 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\autorization\guard.routes.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\model\Product.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\model\User.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\products\search\search.product.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\products\product.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Store\search\Store.Search.Component.css" />
+    <TypeScriptCompile Include="ClientApp\src\app\Store\search\Store.Search.Component.html">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\Store\search\Store.Search.Component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\user\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\user\register\register.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\services\product\product.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\services\user\user.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Update="ClientApp\src\app\Store\search\Store.Search.Component.css">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

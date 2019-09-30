@@ -34,7 +34,7 @@
            'is-invalid': senha.invalid && (senha.dirty || senha.touched),
            'is-valid': senha.valid && (senha.dirty || senha.touched)
            }"
-           [(ngModel)]="user.senha"
+           [(ngModel)]="user.password"
            #senha="ngModel"
            required />
 
@@ -43,8 +43,17 @@
         Senha deve ser informada
       </div>
     </div>
+    <div class="alert alert-danger" *ngIf="message">
+      {{message}}
+    </div>
 
-    <button class="btn btn-primary btn-block mb-2" type="submit" (click)="entrar()">Entrar</button>
+
+    <button class="btn btn-primary btn-block mb-2" type="submit" (click)="login()"  [disabled]="playSpinner">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="playSpinner"></span>
+    Entrar
+    </button>
+
+    <div>Novo por aqui? <a [routerLink]='["/register"]'>Registre-se</a></div>
     <img src="../../../assets/Img/ImagemTeste.jpg" />
 
   </form>
