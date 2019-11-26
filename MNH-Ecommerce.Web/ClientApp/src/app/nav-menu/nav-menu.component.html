@@ -3,7 +3,7 @@
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'>MNH_Ecommerce.Web</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+              [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
@@ -11,9 +11,11 @@
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
             <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="adminUser()">
             <a class="nav-link text-dark" [routerLink]='["/searchProduct"]'>Produto</a>
           </li>
+
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!AutenticatedUser()">
             <a class="nav-link text-dark" [routerLink]='["/enter"]'>Entrar</a>
           </li>
@@ -24,7 +26,11 @@
               <li class="dropdown-item" role="menu" [routerLink]='["/logout"]' (click)="Logout()">Logout</li>
             </ul>
           </li>
-
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="haveItems ()">
+            <a class="nav-link text-dark" [routerLink]='["/store-buy"]'>
+              <img src="assets/Img/carrinho.png" style=" width:30px; height:30px;"/>
+            </a>
+          </li>
           <!--<li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="AutenticatedUser()">
             <a class="nav-item nav-link text-dark" [routerLink]='["/logout"]' (click)="Logout()">Sair</a>
           </li>-->

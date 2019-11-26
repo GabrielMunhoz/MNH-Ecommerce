@@ -1,7 +1,9 @@
 export class Product {
-  public Id: number;
+  public id: number;
   public name: string;  
   public description: string;
   public price: number;
   public fileName: string;
+  public priceOrginal: number;
+  public quant: number;
 }

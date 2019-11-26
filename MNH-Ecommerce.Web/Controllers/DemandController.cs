@@ -13,6 +13,11 @@ namespace MNH_Ecommerce.Web.Controllers
     {
         private readonly IDemandRepository _DemandRepository;
 
+        public DemandController(IDemandRepository demandRepository)
+        {
+            this._DemandRepository = demandRepository;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,8 +36,10 @@ namespace MNH_Ecommerce.Web.Controllers
         {
             try
             {
+                _DemandRepository.Add(demand);
 
-                return Ok(demand);
+                return Ok(demand.Id);
+
             }
             catch (Exception e)
             {

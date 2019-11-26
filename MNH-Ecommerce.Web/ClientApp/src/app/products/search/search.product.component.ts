@@ -25,7 +25,8 @@ export class SearchProductComponent implements OnInit {
       })
   }
 
-  public addProduct() {
+    public addProduct() {
+        sessionStorage.setItem('ProductSession', JSON.stringify(""));
     this.router.navigate(['/registerProduct'])
   }
 

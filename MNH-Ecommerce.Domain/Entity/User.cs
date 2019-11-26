@@ -9,6 +9,8 @@ namespace MNH_Ecommerce.Domain.Entity
         public string Password { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        public bool IsAdmin{ get; set; }
+
         /// <summary>
         /// Nenhum ou muitos pedidos
         /// </summary>

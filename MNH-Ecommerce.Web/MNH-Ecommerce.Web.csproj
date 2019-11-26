@@ -28,15 +28,22 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\autorization\guard.routes.ts" />
+    <None Remove="ClientApp\src\app\model\demand.ts" />
+    <None Remove="ClientApp\src\app\model\itemDemand.ts" />
     <None Remove="ClientApp\src\app\model\Product.ts" />
     <None Remove="ClientApp\src\app\model\User.ts" />
     <None Remove="ClientApp\src\app\products\search\search.product.component.ts" />
     <None Remove="ClientApp\src\app\products\product.component.ts" />
+    <None Remove="ClientApp\src\app\Store\Buy\completedBuy.component.html" />
+    <None Remove="ClientApp\src\app\Store\Buy\completedBuy.component.ts" />
+    <None Remove="ClientApp\src\app\Store\Buy\store.buy.component.ts" />
+    <None Remove="ClientApp\src\app\Store\Product\store.product.component.ts" />
     <None Remove="ClientApp\src\app\Store\search\Store.Search.Component.css" />
     <None Remove="ClientApp\src\app\Store\search\Store.Search.Component.html" />
     <None Remove="ClientApp\src\app\Store\search\Store.Search.Component.ts" />
     <None Remove="ClientApp\src\app\user\login\login.component.ts" />
     <None Remove="ClientApp\src\app\user\register\register.component.ts" />
+    <None Remove="ClientApp\src\services\Demand\demand.service.ts" />
     <None Remove="ClientApp\src\services\product\product.service.ts" />
     <None Remove="ClientApp\src\services\user\user.service.ts" />
   </ItemGroup>
@@ -47,10 +54,18 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\autorization\guard.routes.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\model\demand.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\model\itemDemand.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\model\Product.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\model\User.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\products\search\search.product.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\products\product.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Store\Buy\completedBuy.component.html">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\Store\Buy\completedBuy.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Store\Buy\store.buy.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Store\Product\store.product.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Store\search\Store.Search.Component.css" />
     <TypeScriptCompile Include="ClientApp\src\app\Store\search\Store.Search.Component.html">
       <SubType>Code</SubType>
@@ -60,6 +75,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\user\register\register.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\services\Demand\demand.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\product\product.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\user\user.service.ts" />
   </ItemGroup>

@@ -43,6 +43,7 @@ namespace MNH_Ecommerce.Web
 
             //Passando o contrato
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IDemandRepository, DemandRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             //services.AddDbContext<MNH_EcommerceContext> (options =>
@@ -89,8 +90,8 @@ namespace MNH_Ecommerce.Web
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
         }

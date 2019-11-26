@@ -4,14 +4,16 @@ using MNH_Ecommerce.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MNH_Ecommerce.Repository.Migrations
 {
     [DbContext(typeof(MNH_EcommerceContext))]
-    partial class MNH_EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20191110223716_addColAdmin")]
+    partial class addColAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

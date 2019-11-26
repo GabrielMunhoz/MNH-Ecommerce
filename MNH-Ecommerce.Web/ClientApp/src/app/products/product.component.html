@@ -27,11 +27,15 @@
            }"
        [(ngModel)]="product.description"
        #description ="ngModel"
-       required/>
+       required
+       minlength="50"/>
 
 <div class="invalid-feedback mb-2" *ngIf="description.invalid && (description.dirty || description.touched)">
   <div *ngIf="description.errors.required">
     Erro de preenchimento
+  </div>
+  <div *ngIf="description.errors.minlength">
+    Campo deve ter no minimo 50 caracteres
   </div>
 </div>
   <input type="number" id="inputPrice"

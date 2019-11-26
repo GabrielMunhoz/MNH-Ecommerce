@@ -1,44 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Session } from 'protractor';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
+import { StoreCartComponent } from '../Store/Cart/store.cart.component';
 
 @Component({
-  selector: 'app-nav-menu',
-  templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+    selector: 'app-nav-menu',
+    templateUrl: './nav-menu.component.html',
+    styleUrls: ['./nav-menu.component.css']
 })
 
-export class NavMenuComponent {
-  isExpanded = false;
+export class NavMenuComponent implements OnInit{
+    isExpanded = false;
+    public cart: StoreCartComponent;
 
-  get user() {
+    get user() {
 
-    var u = this.userService.user;
+        var user = this.userService.user;
 
-     return u;
-  }
+        return user;
+    }
 
-  constructor(private router: Router, private userService: UserService) {
+    ngOnInit(): void {
+        this.cart = new StoreCartComponent();
+    }
+    constructor(private router: Router, private userService: UserService) {
 
-  }
+    }
 
-  collapse() {
-    this.isExpanded = false;
-  }
+    collapse() {
+        this.isExpanded = false;
+    }
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
+    toggle() {
+        this.isExpanded = !this.isExpanded;
+    }
 
-  public AutenticatedUser(): boolean {
+    public AutenticatedUser(): boolean {
+        if (this.userService.AutenticatedUser() == null || this.userService.AutenticatedUser() == false) {
+            return false;
+        }
+        return true
+    }
+    public adminUser():boolean {
+        return this.userService.adminUser();
+    }
 
-   return this.userService.AutenticatedUser();
-  }
+    Logout() {
+        this.userService.cleanSession();
+        this.router.navigate(['/']);
+    }
 
-  Logout() {
-    this.userService.cleanSession();
-    this.router.navigate(['/']);
-  }
+    public haveItems(): boolean {
 
+        return this.cart.haveItems();
+    }
 }

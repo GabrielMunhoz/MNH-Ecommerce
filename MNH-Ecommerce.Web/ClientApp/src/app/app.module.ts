@@ -17,34 +17,44 @@ import { ProductService } from '../services/product/product.service';
 import { SearchProductComponent } from './products/search/search.product.component';
 import { StoreSearchComponent } from './Store/search/Store.Search.Component';
 import { truncate } from 'fs';
+import { StoreProductComponent } from './Store/Product/store.product.component';
+import { StoreBuyComponent } from './Store/Buy/store.buy.component';
+import { DemandService } from '../services/Demand/demand.service';
+import { CompletedBuyComponent } from './Store/Buy/completedBuy.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    ProductComponent,
-    LoginComponent,
-    RegisterUserComponent,
-    SearchProductComponent,
-    StoreSearchComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule, 
-    TruncateModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'product', component: ProductComponent},
-      { path: 'enter', component: LoginComponent },
-      { path: 'register', component: RegisterUserComponent },
-      { path: 'registerProduct', component: ProductComponent },
-      { path: 'searchProduct', component: SearchProductComponent, canActivate: [GuardRoutes] }
+    declarations: [
+        AppComponent,
+        NavMenuComponent,
+        HomeComponent,
+        ProductComponent,
+        LoginComponent,
+        RegisterUserComponent,
+        SearchProductComponent,
+        StoreSearchComponent,
+        StoreProductComponent,
+        StoreBuyComponent,
+        CompletedBuyComponent
+    ],
+    imports: [
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        HttpClientModule,
+        FormsModule,
+        TruncateModule,
+        RouterModule.forRoot([
+            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: 'product', component: ProductComponent },
+            { path: 'enter', component: LoginComponent },
+            { path: 'register', component: RegisterUserComponent },
+            { path: 'registerProduct', component: ProductComponent },
+            { path: 'searchProduct', component: SearchProductComponent, canActivate: [GuardRoutes] },
+            { path: 'store-Product', component: StoreProductComponent },
+            { path: 'store-buy', component: StoreBuyComponent, canActivate: [GuardRoutes] },
+            { path: 'completedBuy', component: CompletedBuyComponent}
 
-    ])
-  ],
-  providers: [UserService,ProductService],
-  bootstrap: [AppComponent]
+        ])
+    ],
+    providers: [UserService, ProductService,DemandService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
