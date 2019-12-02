@@ -21,6 +21,12 @@ import { StoreProductComponent } from './Store/Product/store.product.component';
 import { StoreBuyComponent } from './Store/Buy/store.buy.component';
 import { DemandService } from '../services/Demand/demand.service';
 import { CompletedBuyComponent } from './Store/Buy/completedBuy.component';
+import {
+    SocialLoginModule, AuthServiceConfig, GoogleLoginProvider,
+    FacebookLoginProvider,
+} from "angular-6-social-login";
+
+
 
 @NgModule({
     declarations: [
@@ -39,6 +45,7 @@ import { CompletedBuyComponent } from './Store/Buy/completedBuy.component';
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
+        SocialLoginModule,
         FormsModule,
         TruncateModule,
         RouterModule.forRoot([
@@ -50,11 +57,34 @@ import { CompletedBuyComponent } from './Store/Buy/completedBuy.component';
             { path: 'searchProduct', component: SearchProductComponent, canActivate: [GuardRoutes] },
             { path: 'store-Product', component: StoreProductComponent },
             { path: 'store-buy', component: StoreBuyComponent, canActivate: [GuardRoutes] },
-            { path: 'completedBuy', component: CompletedBuyComponent}
+            { path: 'completedBuy', component: CompletedBuyComponent }
 
         ])
     ],
-    providers: [UserService, ProductService,DemandService],
+    providers: [UserService, ProductService, DemandService,
+        {
+            provide: AuthServiceConfig,
+            useFactory: getAuthServiceConfigs
+        }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getAuthServiceConfigs() {
+    // tslint:disable-next-line:prefer-const
+    let config = new AuthServiceConfig(
+        [
+            {
+                id: FacebookLoginProvider.PROVIDER_ID,
+                provider: new FacebookLoginProvider("Your-Facebook-app-id")
+            },
+            {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider("454624941562-j9uneqfcf0caoo4q24pfiolbmcn322vs.apps.googleusercontent.com")
+            }
+        ]
+    );
+    return config;
+}
+
+
