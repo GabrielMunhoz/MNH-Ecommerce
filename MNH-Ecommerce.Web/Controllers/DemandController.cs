@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MNH_Ecommerce.Domain.Contrats;
 using MNH_Ecommerce.Domain.Entity;
 using System;
@@ -17,7 +18,7 @@ namespace MNH_Ecommerce.Web.Controllers
         {
             this._DemandRepository = demandRepository;
         }
-
+        [Authorize("Bearer")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,6 +32,7 @@ namespace MNH_Ecommerce.Web.Controllers
             }
 
         }
+        [Authorize("Bearer")]
         [HttpPost]
         public IActionResult Post([FromBody] Demand demand)
         {

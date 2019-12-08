@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MNH_Ecommerce.Domain.Contrats;
@@ -27,7 +28,6 @@ namespace MNH_Ecommerce.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
             _hostingEnvironment = hostingEnvironment;
         }
-
         [HttpGet]
         public IActionResult Get()
         {
@@ -41,7 +41,7 @@ namespace MNH_Ecommerce.Web.Controllers
             }
 
         }
-
+        [Authorize("Bearer")]
         [HttpPost]
         public IActionResult Post([FromBody]Product product)
         {
@@ -69,6 +69,7 @@ namespace MNH_Ecommerce.Web.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+        [Authorize("Bearer")]
         [HttpPost("Delete")]
         public IActionResult Delete([FromBody] Product product)
         {
@@ -83,7 +84,7 @@ namespace MNH_Ecommerce.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize("Bearer")]
         [HttpPost("SendFile")]
         public IActionResult SendFile()
         {

@@ -19,13 +19,23 @@ export class ProductComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    var productSession = sessionStorage.getItem("ProductSession");
+      try {
+          var productSession = sessionStorage.getItem("ProductSession");
 
-    if (productSession) {
-      this.product = JSON.parse(productSession);
-    } else {
-      this.product = new Product()
-    }
+          if (productSession && productSession != null) {
+              this.product = JSON.parse(productSession);
+              if (this.product == undefined || this.product == null || this.product.name == undefined) {
+
+                  this.product = new Product();
+              }
+          } else {
+              this.product = new Product();
+          }
+      }
+      catch (exception)
+      {
+
+      }
 
   }
 
@@ -58,8 +68,8 @@ export class ProductComponent implements OnInit{
     this.productService.sendFile(this.arquivoSelecionado)
       .subscribe(
         fileReturn => {
-          this.product.fileName = fileReturn
           console.log(fileReturn);
+          this.product.fileName = fileReturn
         },
         e => {
           console.log(e.error);

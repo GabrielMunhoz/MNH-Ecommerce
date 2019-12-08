@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TruncateModule } from 'ng2-truncate';
+import { JwtHelperService,JWT_OPTIONS } from "@auth0/angular-jwt";
+
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -25,6 +27,8 @@ import {
     SocialLoginModule, AuthServiceConfig, GoogleLoginProvider,
     FacebookLoginProvider,
 } from "angular-6-social-login";
+import { HttpAuthInterceptor } from './model/http-auth-interceptor';
+import { JwtInterceptor } from './model/JwrInterceptor';
 
 
 
@@ -65,7 +69,11 @@ import {
         {
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
-        }],
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
@@ -76,7 +84,7 @@ export function getAuthServiceConfigs() {
         [
             {
                 id: FacebookLoginProvider.PROVIDER_ID,
-                provider: new FacebookLoginProvider("Your-Facebook-app-id")
+                provider: new FacebookLoginProvider("437399553616919")
             },
             {
                 id: GoogleLoginProvider.PROVIDER_ID,
