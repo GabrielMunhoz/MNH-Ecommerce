@@ -16,3 +16,15 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+.fontTeste {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 30px;
+  letter-spacing: -2.8px;
+  word-spacing: -1.2px;
+  color: #000000;
+  font-weight: 400;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: italic;
+  font-variant: normal;
+  text-transform: capitalize;
+}
