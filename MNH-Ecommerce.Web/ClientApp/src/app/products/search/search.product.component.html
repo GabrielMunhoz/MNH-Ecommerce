@@ -2,7 +2,14 @@
 <p *ngIf ="!products"> Carregando Produtos....</p>
 
 <button class="btn btn-primary mb-2" (click) ="addProduct()">adicionar</button>
-
+<div class="row mb-2">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1"></span>
+    </div>
+    <input type="text" (keydown)="filtrarTabela($event.target.value)" class="form-control" placeholder="Pesquisar"  aria-describedby="basic-addon1">
+  </div>
+</div>
 <table class=" table table-hover" *ngIf="products">
   <thead>
     <tr>
@@ -17,7 +24,7 @@
     <tr *ngFor="let p of products">
       <td>{{p.name}}</td>
       <td style=" width :50%;">{{p.description}}</td>
-      <td>R${{p.price}}</td>
+      <td>R${{p.price | number : '1.2-2'}}</td>
       <td><img src="../../../../../Files/{{p.fileName}}" style=" width :40%; height:10%;" /></td>
       <td>
       <button class="btn btn-success btn-sm" (click)="edit(p)"> Editar</button>

@@ -11,13 +11,14 @@ import { Router } from "@angular/router";
 
 export class SearchProductComponent implements OnInit {
   public products: Product[];
-
+    public auxProd: Product[];
   ngOnInit(): void {
     }
   constructor(private productService: ProductService, private router: Router) {
     this.productService.getAllProducts().subscribe(
       products => {
-        this.products = products
+            this.products = products;
+            this.auxProd = products;
         console.log(products);
       },
       e => {
@@ -35,6 +36,12 @@ export class SearchProductComponent implements OnInit {
     this.router.navigate(['/product'])
   }
 
+    public filtrarTabela(value: string)
+    {
+      
+      this.products = this.auxProd.filter(valu => valu.name.includes(value));
+
+    }
   public delete(product: Product) {
     var retrn=confirm("Deseja Realmente Deletar? ");
     if (retrn == true) {

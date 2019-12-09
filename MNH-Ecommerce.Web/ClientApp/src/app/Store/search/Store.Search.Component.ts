@@ -10,7 +10,8 @@ import { Router } from "@angular/router";
 })
 
 export class StoreSearchComponent implements OnInit{
-  public products : Product[];
+    public products: Product[];
+    public auxProd: Product[];
 
   ngOnInit(): void {
 
@@ -18,12 +19,18 @@ export class StoreSearchComponent implements OnInit{
   constructor(private productService: ProductService, private router:Router) {
     this.productService.getAllProducts().subscribe(
       products => {
-      this.products = products
+            this.products = products;
+            this.auxProd = products;
       },
       err =>
       {
         console.log(err.error)
       })
+    }
+
+    public pesquisarProduto(value: string) {
+
+       this.products = this.auxProd.filter(valu => valu.name.includes(value));
     }
 
     public openProduct(product:Product) {

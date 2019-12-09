@@ -1,9 +1,18 @@
+<div class="row mb-2">
+  <div class="col-sm-3">
+  <div class="col-sm"></div>
+  <div class="col-sm"></div>
+  <div class="col-sm">
+    <input class="form-control mr-sm-2" type="search" (keydown)="pesquisarProduto($event.target.value)" placeholder="Pesquisa" aria-label="Pesquisar">
+  </div>
+  </div>
+</div>
 
-  <div *ngIf="!products">Listando os produtos.....</div>
+<div *ngIf="!products">Listando os produtos.....</div>
 <div class="container" *ngIf="products">
   <div class="row">
     <div class="col-md-4 mb-2" *ngFor="let p of products">
-      <a (click) ="openProduct(p)" style="cursor:pointer;">
+      <a (click)="openProduct(p)" style="cursor:pointer;">
         <div class="card">
           <img class="card-top" src="../../../../../Files/{{p.fileName}}" style="width:200px; height:200px;" />
           <div class="card-body">

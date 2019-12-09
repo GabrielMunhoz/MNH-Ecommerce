@@ -43,7 +43,9 @@ export class LoginComponent implements OnInit {
             this.logar();
 
         }, err => {
-            console.log(err.error);
+                console.log(err.error);
+                this.playSpinner = false;
+                this.message = err.error;
         });
 
 
