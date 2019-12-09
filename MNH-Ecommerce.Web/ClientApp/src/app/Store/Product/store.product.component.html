@@ -3,7 +3,7 @@
     <div class="col-md-6"><img src="../../../../../Files/{{product.fileName}}" style="width:200px; height:200px;" /></div>
     <div class="col-md-6">
       <div class="row mb-4" style="color:#666"><h1 class="h4">{{product.description}}</h1></div>
-      <div class="row mb-4"><h1 class="h4">R${{product.price}}</h1></div>
+      <div class="row mb-4"><h1 class="h4">R${{product.price| number:'1.2-2'}}</h1></div>
       <div class="row mb-4">
         <button class="btn btn-danger btn-lg" (click)="buy()">Comprar</button>
       </div>

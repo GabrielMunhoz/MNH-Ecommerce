@@ -20,7 +20,7 @@
                    class="form-control" value="1"
                    (change)="updatePrice(p,$event.target.value)" min="1" placeholder="1" [(ngModel)]="p.quant"/>
             </td>
-            <td style="width:20%;">{{p.price}}</td>
+            <td style="width:20%;">{{p.price| number:'1.2-2'}}</td>
             <td style="width:10%;"><button class="btn btn-secondary btn-sm" (click) ="remover(p)">Remover</button></td>
           </tr>
         </tbody>
@@ -36,7 +36,7 @@
             <table class="mb-4 table">
             <tr>
               <td width="60%"><strong>Total: </strong></td>
-              <td><strong>R${{total}}</strong></td>
+              <td><strong>R${{total| number:'1.2-2'}}</strong></td>
             </tr>
             </table>
             <button class="btn btn-danger" (click) ="Buy()">Concluir compra</button>

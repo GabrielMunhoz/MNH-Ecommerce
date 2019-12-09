@@ -9,7 +9,8 @@
           <div class="card-body">
             <h5 class="card-title"> {{p.name}}</h5>
             <div class="card-text"> {{p.description | truncate:50}}</div>
-            <h5 class="h5">R${{p.price}}</h5>
+            <!--<h5 class="h5"><span>R${{p.price | number:2}}</span></h5>-->
+            <h5 class="h5">R${{p.price | number:'1.2-2'}}</h5>
           </div>
         </div>
       </a>

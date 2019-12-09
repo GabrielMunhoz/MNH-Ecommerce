@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { TruncateModule } from 'ng2-truncate';
-import { JwtHelperService,JWT_OPTIONS } from "@auth0/angular-jwt";
 
 
 import { AppComponent } from './app.component';
