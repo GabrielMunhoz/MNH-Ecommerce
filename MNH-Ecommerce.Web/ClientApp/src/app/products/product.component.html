@@ -28,7 +28,7 @@
        [(ngModel)]="product.description"
        #description ="ngModel"
        required
-       minlength="50"/>
+       minlength="10"/>
 
 <div class="invalid-feedback mb-2" *ngIf="description.invalid && (description.dirty || description.touched)">
   <div *ngIf="description.errors.required">

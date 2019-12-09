@@ -11,14 +11,12 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './products/product.component';
-import { LoginComponent } from "./user/login/login.Component";
 import { GuardRoutes } from './autorization/guard.routes';
 import { UserService } from '../services/user/user.service';
 import { RegisterUserComponent } from './user/register/register.component';
 import { ProductService } from '../services/product/product.service';
 import { SearchProductComponent } from './products/search/search.product.component';
 import { StoreSearchComponent } from './Store/search/Store.Search.Component';
-import { truncate } from 'fs';
 import { StoreProductComponent } from './Store/Product/store.product.component';
 import { StoreBuyComponent } from './Store/Buy/store.buy.component';
 import { DemandService } from '../services/Demand/demand.service';
@@ -29,6 +27,7 @@ import {
 } from "angular-6-social-login";
 import { HttpAuthInterceptor } from './model/http-auth-interceptor';
 import { JwtInterceptor } from './model/JwrInterceptor';
+import { LoginComponent } from './user/login/login.component';
 
 
 
